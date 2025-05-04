@@ -1,26 +1,40 @@
-// Задача 1. Пакування товарів
-// Напиши функцію isEnoughCapacity(products, containerSize), яка обчислює,
-// чи помістяться всі товари в контейнер при пакуванні.
+// Задача 1. Акаунт користувача
+// Перед звільненням розробник зламав вихідний код управління акаунтами користувачів нашого сервісу доставки їжі.
+// Виконай рефакторинг методів об'єкта customer,
+// розставивши відсутні this під час звернення до властивостей об'єкта.
 
-// Функція оголошує два параметри:
+// Використай цей стартовий код і виконай рефакторинг.
+// Після оголошення об'єкта ми додали виклики методів.
+// У консоль будуть виведені результати їх роботи.
 
-// products — об'єкт, у якому ключі містять назви товарів, а їхні значення — кількість цих товарів.
-// Наприклад, { apples: 2, grapes: 4 }.
-// containerSize — число, максимальна кількість одиниць товарів, яку в себе може вмістити контейнер.
-// Функція має повернути результат перевірки, чи помістяться всі товари в контейнер.
-// Тобто порахувати загальну кількість товарів в об'єкті products і повернути true,якщо
-//  вона менше або дорівнює containerSize, і false, якщо ні.
 
-function isEnoughCapacity(products, containerSize) {
+const customer = {
+  username: "Mango",
+  balance: 24000,
+  discount: 0.1,
+  orders: ["Burger", "Pizza", "Salad"],
+  // Change code below this line
+  getBalance() {
+    return balance;
+  },
+  getDiscount() {
+    return discount;
+  },
+  setDiscount(value) {
+    discount = value;
+  },
+  getOrders() {
+    return orders;
+  },
+  addOrder(cost, order) {
+    balance -= cost - cost * discount;
+    orders.push(order);
+  },
+  // Change code above this line
+};
 
-  let totalCounter = 0;
-  for (const key in products) {
-    totalCounter += products[key]
-  }
-  return totalCounter <= containerSize;
-}
-
-console.log(isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)); // true
-console.log(isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)); // false
-console.log(isEnoughCapacity({ apples: 1, lime: 5, tomatos: 3 }, 14)); // true
-console.log(isEnoughCapacity({ apples: 18, potatos: 5, oranges: 2 }, 7)); // false
+customer.setDiscount(0.15);
+console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, "Steak");
+console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
