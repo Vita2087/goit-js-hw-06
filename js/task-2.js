@@ -6,26 +6,40 @@
 // Оголоси наступні методи класу:
 
 // getItems() — повертає масив поточних товарів у приватній властивості items.
-//   addItem(newItem) — приймає новий товар newItem і додає його до масиву товарів
+// addItem(newItem) — приймає новий товар newItem і додає його до масиву товарів
 // у приватну властивість items об'єкта.
 // removeItem(itemToRemove) — приймає рядок з назвою товару itemToRemove
 // і видаляє його з масиву товарів у приватній властивості items об'єкта.
 
+class Storage {
+  #items; // масив
+  constructor(initItems) {
+    this.#items = initItems;
+  }
+  getItems() {
+    return this.#items;
+  }
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+  removeItem(itemToRemove) {
+    this.#items = this.#items.filter(elem => {return elem !== itemToRemove;}); //пов новий масив без ел масиву з імям itemToRemove
+  }
+}
+// ініціалізація екземпляра
+const storage = new Storage(['Nanitoids', 'Prolonger', 'Antigravitator']);
 
-// Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його після оголошення класу для перевірки коректності роботи.
-//  У консоль будуть виведені результати їх роботи.Будь ласка, нічого там не змінюй.
 
 
 
-
-const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+// виклики методів для перевірки коректності роботи.
 console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
 
-storage.addItem("Droid");
+storage.addItem('Droid');
 console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
 
-storage.removeItem("Prolonger");
+storage.removeItem('Prolonger');
 console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
 
-storage.removeItem("Scaner");
+storage.removeItem('Scaner');
 console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
